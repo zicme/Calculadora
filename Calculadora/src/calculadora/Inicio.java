@@ -8,22 +8,25 @@ import java.util.Scanner;
  */
 public class Inicio {
 
-    public float r;
+    public String r;
     public float areaCirculo;
     public float perimetroCirculo;
-    public float Base;
-    public float Altura;
+    public String Base;
+    public String Altura;
     public float AreaTriangulo;
     public float PerimetroTriangulo;
-    public float Lado;
+    public String Lado;
     public float AreaCuadrado;
     public float PerimetroCuadrado;
     public float AreaRectangulo;
     public float PerimetroRectangulo;
-    public float LadoA;
-    public float LadoB;
+    public String LadoA;
+    public String LadoB;
 
-    public Inicio(float AreaCuadrado, float AreaRectangulo, float PerimetroCuadrado, float PerimetroRectangulo, float LadoA, float LadoB, float Lado, float PerimetroTriangulo, float AreaTriangulo, float Altura, float r, float areaCirculo, float perimetroCirculo, float Base) {
+    public Inicio(float AreaCuadrado, float AreaRectangulo, float PerimetroCuadrado,
+             float PerimetroRectangulo, String LadoA, String LadoB, String Lado,
+             float PerimetroTriangulo, float AreaTriangulo, String Altura, String r,
+             float areaCirculo, float perimetroCirculo, String Base) {
         this.r = r;
         this.Lado = Lado;
         this.PerimetroTriangulo = PerimetroTriangulo;
@@ -86,23 +89,38 @@ public class Inicio {
     }
 
     public void Circulo(int n) {
-        float d;
-        Scanner ff = new Scanner(System.in);
-        switch (n) {
 
+        float d;
+        Scanner sc = new Scanner(System.in);
+        switch (n) {
             case 1:
                 System.out.println("Ingresa radio");
-                r = ff.nextFloat();
-                areaCirculo = (float) (3.14 * r * r);
-                System.out.println("El area del circulo es:" + areaCirculo);
-                break;
+                r = sc.nextLine();
+                System.out.println("numero: ");
+                if (ValidarNumero(r) == true) {
+                    float aux;
+                    aux = Float.valueOf(r);
+                    areaCirculo = (float) (3.14 * aux * aux);
+                    System.out.println("El area del circulo es:" + areaCirculo);
+                    break;
+                } else {
+                    System.out.println(r + " " + "no es un numero, intentalo denuevo...");
+                    break;
+                }
             case 2:
                 System.out.println("Ingrese Radio");
-                r = ff.nextFloat();
-                d = r + r;
-                perimetroCirculo = (float) ((3.14) * (d));
-                System.out.println("El perimetro del circulo es:" + perimetroCirculo);
-                break;
+                r = sc.nextLine();
+                if (ValidarNumero(r) == true) {
+                    float aux = Float.valueOf(r);
+                    d = 2 * aux;
+                    perimetroCirculo = (float) ((3.14) * (d));
+                    System.out.println("El perimetro del circulo es:" + perimetroCirculo);
+                    break;
+                } else {
+                    System.out.println(r + " no es un numero.");
+                    break;
+                }
+
             default:
                 System.out.println("Error");
 
@@ -115,19 +133,38 @@ public class Inicio {
         switch (n) {
             case 1:
                 System.out.println("Ingresa Base");
-                Base = ff.nextFloat();
-                System.out.println("Ingrese Altura");
-                Altura = ff.nextFloat();
-                AreaTriangulo = Base * Altura / 2;
-                System.out.println("El area del triangulo es de:" + AreaTriangulo);
-                break;
+                Base = ff.nextLine();
+                if (ValidarNumero(Base) == true) {
+                    float aux = Float.valueOf(Base);
+                    System.out.println("Ingrese Altura");
+                    Altura = ff.nextLine();
+                    if (ValidarNumero(Altura) == true) {
+                        float aux2 = Float.valueOf(Altura);
+                        AreaTriangulo = aux * aux2 / 2;
+                        System.out.println("El area del triangulo es de:" + AreaTriangulo);
+                        break;
+                    } else {
+                        System.out.println("La altura ingresada debe ser un  numero");
+                        break;
+                    }
+                } else {
+                    System.out.println("Base incorrecta, ingrese un numero.");
+                    break;
+                }
             case 2:
                 //triangulo equilatero tiene todos sus lados iguales 
                 System.out.println("Ingrese Lado del triangulo Equilátero:");
-                Lado = ff.nextFloat();
-                PerimetroTriangulo = Lado * 3;
-                System.out.println("El perimetro del triangulo es de:" + PerimetroTriangulo);
-                break;
+                Lado = ff.nextLine();
+                if (ValidarNumero(Lado) == true) {
+                    float aux = Float.valueOf(Lado);
+                    PerimetroTriangulo = aux * 3;
+                    System.out.println("El perimetro del triangulo es de:" + PerimetroTriangulo);
+                    break;
+                } else {
+                    System.out.println("El valor ingresado es incorrecto.");
+                    break;
+                }
+
             default:
                 System.out.println("Error");
 
@@ -139,21 +176,31 @@ public class Inicio {
         Scanner ff = new Scanner(System.in);
         switch (n) {
             case 1:
-                System.out.println("Ingresa Lado A");
-                LadoA = ff.nextFloat();
-                System.out.println("Ingrese Lado B");
-                LadoB = ff.nextFloat();
-                AreaCuadrado = LadoA * LadoB;
-                System.out.println("El area del Cuadrado es de:" + AreaCuadrado);
-                break;
+                System.out.println("Ingresa Lado");
+                LadoA = ff.nextLine();
+                if (ValidarNumero(LadoA) == true) {
+                    float aux = Float.valueOf(LadoA);
+                    AreaCuadrado = aux * aux;
+                    System.out.println("El area del Cuadrado es de:" + AreaCuadrado);
+                    break;
+                } else {
+                    System.out.println("El Lado debe ser un dato numerico");
+                    break;
+                }
+
             case 2:
                 System.out.println("Ingrese Lado A:");
-                LadoA = ff.nextFloat();
-                System.out.println("Ingrese Lado B:");
-                LadoB = ff.nextFloat();
-                PerimetroCuadrado = (LadoA * 2) + (LadoB * 2);
-                System.out.println("El perimetro del Cuadrado es de:" + PerimetroCuadrado);
-                break;
+                LadoA = ff.nextLine();
+                if (ValidarNumero(LadoA) == true) {
+                    float aux = Float.valueOf(LadoA);
+                    PerimetroCuadrado = (aux * 4);
+                    System.out.println("El perimetro del Cuadrado es de:" + PerimetroCuadrado);
+                    break;
+                } else {
+                    System.out.println("Lado debe ser un dato numerico");
+                    break;
+                }
+
             default:
                 System.out.println("Error");
 
@@ -166,24 +213,60 @@ public class Inicio {
         switch (n) {
             case 1:
                 System.out.println("Ingresa Base");
-                Base = ff.nextFloat();
-                System.out.println("Ingrese Altura");
-                Altura = ff.nextFloat();
-                AreaRectangulo = Base * Altura;
-                System.out.println("El area del rectangulo es de:" + AreaRectangulo);
-                break;
+                Base = ff.nextLine();
+                if (ValidarNumero(Base) == true) {
+                    System.out.println("Ingrese Altura");
+                    Altura = ff.nextLine();
+                    if (ValidarNumero(Altura) == true) {
+                        float aux1 = Float.valueOf(Base);
+                        float aux2 = Float.valueOf(Altura);
+                        AreaRectangulo = aux1 * aux2;
+                        System.out.println("El area del rectangulo es de:" + AreaRectangulo);
+                        break;
+                    } else {
+                        System.out.println("Altura ingresada debe ser numero");
+                        break;
+                    }
+                } else {
+                    System.out.println("Base incorrecta, ingrese un numero.");
+                    break;
+                }
             case 2:
                 System.out.println("Ingresa Base");
-                Base = ff.nextFloat();
-                System.out.println("Ingrese Altura");
-                Altura = ff.nextFloat();
-                PerimetroRectangulo = (Base * 2) + (Altura * 2);
-                System.out.println("El perimetro del Rectangulo es de:" + PerimetroRectangulo);
-                break;
+                Base = ff.nextLine();
+                if (ValidarNumero(Base) == true) {
+                    System.out.println("Ingrese Altura");
+                    Altura = ff.nextLine();
+                    if (ValidarNumero(Altura) == true) {
+                        float aux1 = Float.valueOf(Base);
+                        float aux2 = Float.valueOf(Altura);
+                        PerimetroRectangulo = (aux1 * 2) + (aux2 * 2);
+                        System.out.println("El perimetro del Rectangulo es de:" + PerimetroRectangulo);
+                        break;
+                    } else {
+                        System.out.println("Altura igresada debe ser numero");
+                        break;
+                    }
+                } else {
+                    System.out.println("Base incorrecta, ingrese un numero.");
+                    break;
+                }
+
             default:
                 System.out.println("Error");
 
         }
 
+    }
+
+    public boolean ValidarNumero(String num) {
+        int val;
+        try {
+            val = Integer.parseInt(num);
+            return true;
+        } catch (Exception e) {
+
+            return false;
+        }
     }
 }
